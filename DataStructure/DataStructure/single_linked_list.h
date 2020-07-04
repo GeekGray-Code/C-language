@@ -1,3 +1,10 @@
+/*************************************************************************
+ > Author:  GeekGray
+ > Mail:    GeekGray@163.com
+ > Time:    2020-07-04
+ > Desc:	线性表的链式存储——————单链表
+ ************************************************************************/
+
 #ifndef _SINGLE_LINKED_LIST_H
 #define _SINGLE_LINKED_LIST_H 
 
@@ -13,7 +20,7 @@ typedef struct node
 	struct node * next;
 }Node, *PNode;
 
-/*封装头尾指针，*/
+/*封装头尾指针*/
 typedef struct List
 {
 	Node* head;

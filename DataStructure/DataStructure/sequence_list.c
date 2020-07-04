@@ -1,3 +1,10 @@
+/*************************************************************************
+ > Author:  GeekGray
+ > Mail:    GeekGray@163.com
+ > Time:    2020-07-04
+ > Desc:	线性表的顺序存储
+ ************************************************************************/
+
 #include<malloc.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,19 +17,31 @@
 /*顺序表测试函数*/
 void SequenceListTest()
 {
-	DynamicArrayTest();
+	StaticListTest();	//静态数组顺序表测试函数
+
+	DynamicListTest();	//动态数组顺序表测试函数
+}
+
+
+
+/*******************************************静态数组表示顺序表*******************************************/
+
+/*静态数组顺序表测试函数*/
+void StaticListTest()
+{
+
 }
 
 
 /*将线性表L中的第i个位置的元素值返回*/
-Status GetElem(SqList L, int i, ElemType e)
+Status GetElem(StaticList stList, int i, ElemType e)
 {
-	if (L.length == 0 || i<1 || i>L.length)
+	if (stList.length == 0 || i<1 || i>stList.length)
 	{
 		return ERROR;
 	}
 
-	e = L.data[i - 1];
+	e = stList.data[i - 1];
 
 	return OK;
 }
@@ -35,134 +54,145 @@ Status GetElem(SqList L, int i, ElemType e)
   将要插入的元素插入到位置i处
   表长加1
 */
-Status ListInsert(SqList* L, int i, ElemType e)
+Status ListInsert(StaticList* pStList, int i, ElemType e)
 {
 
 
-	if (L->length == MAXSIZE)	//线性表已满
+	if (pStList->length == LIST_INIT_SIZE)	//线性表已满
 	{
 		return ERROR;
 	}
 
-	if (i<1 || i>L->length)	//当索引值i不在范围内时
+	if (i<1 || i>pStList->length)	//当索引值i不在范围内时
 	{
 		return ERROR;
 	}
 
-	if (i <= L->length)	//若插入的数据位置不在表尾
+	if (i <= pStList->length)	//若插入的数据位置不在表尾
 	{
-		for (int k = L->length; k >= i - 1; k--)	//将插入的位置后的数据元素向后移动一位
+		for (int k = pStList->length; k >= i - 1; k--)	//将插入的位置后的数据元素向后移动一位
 		{
-			L->data[k + 1] = L->data[k];
+			pStList->data[k + 1] = pStList->data[k];
 		}
 	}
 
-	L->data[i - 1] = e;	//若在表尾，将新元素插入
-	L->length++;	    //线性表当前长度加1
+	pStList->data[i - 1] = e;	//若在表尾，将新元素插入
+	pStList->length++;	    //线性表当前长度加1
 
 	return OK;
 }
 
 
 /*删除线性表L的第i个元素，并用e返回其值，L的长度减1*/
-Status ListDelete(PSqList L, int i, ElemType e)
+Status ListDelete(PStaticList pStList, int i, ElemType e)
 {
-	if (L->length == 0)	//线性表为空
+	if (pStList->length == 0)	//线性表为空
 	{
 		return ERROR;
 	}
 
-	if (i<1 || i>L->length)	//当索引值i不在范围内时
+	if (i<1 || i>pStList->length)	//当索引值i不在范围内时
 	{
 		return ERROR;
 	}
 
-	e = L->data[i - 1];	//	取出该元素
+	e = pStList->data[i - 1];	//	取出该元素
 
-	if (i < L->length)	//如果删除位置不是位于表尾
+	if (i < pStList->length)	//如果删除位置不是位于表尾
 	{
-		for (int k = i; k < L->length; k++)	//将删除位置所有后置元素往前移
+		for (int k = i; k < pStList->length; k++)	//将删除位置所有后置元素往前移
 		{
-			L->data[k - 1] = L->data[k];
+			pStList->data[k - 1] = pStList->data[k];
 		}
 	}
 
-	L->length--;
+	pStList->length--;
 
 	return OK;
 }
+/*******************************************静态数组表示顺序表*******************************************/
 
 
 
-/*********************************************动态数组****************************************************/
-
-/*动态数组测试函数*/
-void DynamicArrayTest()
+/*******************************************动态数组表示顺序表*******************************************/
+/*动态数组顺序表测试函数*/
+void DynamicListTest()
 {
-	DynamicArray dicArr;
-	PDynamicArray pDicArr = &dicArr;
+	DynamicList dyList;
+	PDynamicList pDyList = &dyList;
 
 	/*初始化*/
-	InitArray(pDicArr);
+	InitList(pDyList);
 
 	/*添加元素*/
-	addElems(pDicArr, 1);
-	addElems(pDicArr, 2);
-	addElems(pDicArr, 3);
-	addElems(pDicArr, 4);
-	addElems(pDicArr, 5);
-	addElems(pDicArr, 6);
+	addElems(pDyList, 1);
+	addElems(pDyList, 2);
+	addElems(pDyList, 3);
+	addElems(pDyList, 4);
+	addElems(pDyList, 5);
+	addElems(pDyList, 6);
 
 	/*中间插入*/
-	MidInsert(pDicArr, 10, 5);
-	MidInsert(pDicArr, 10, 10);
+	MidInsert(pDyList, 10, 5);
+	MidInsert(pDyList, 10, 10);
 
 	/*打印数组*/
-	printArray(pDicArr);
+	printf("删除元素前的数组：\n");
+	printList(pDyList);
+
+
+	/*删除*/
+	MidDelete(pDyList,6);
+	//TailDeleteElem(pDyList);
+	//FreeDynamicArray(pDyList);
+
+	/*打印数组*/
+	printf("\n\n删除元素后的数组：\n");
+	printList(pDyList);
 
 
 
-	free(dicArr.pArrayHead);
+	free(pDyList->pListHead);
 }
 
 
 
-/*初始化数组*/
-void InitArray(DynamicArray* pDicArr)
+/*初始化顺序表*/
+void InitList(DynamicList* pDyList)
 {
-	pDicArr->arraysize = 5;
-	pDicArr->pArrayHead = (int*)malloc(sizeof(int) * pDicArr->arraysize);
-	pDicArr->arraylength = 0;
+	pDyList->pListHead = (int*)malloc(sizeof(int) * LIST_INIT_SIZE);
+	pDyList->listsize = LIST_INIT_SIZE;
+	pDyList->listlength = 0;
 }
 
 
 
 /*添加函数*/
-void addElems(PDynamicArray pDicArr, int elemValue)
+void addElems(PDynamicList pDyList, ElemType elemValue)
 {
 	/*判断数组是否满容,若是则扩容*/
-	ExpandSize(pDicArr);
+	ExpandSize(pDyList);
 
 	/*数组未满，仍有空间*/
-	pDicArr->pArrayHead[pDicArr->arraylength] = elemValue;//往原来数组长度尾上装数据
-	pDicArr->arraylength++;                               //数组长度加1
+	pDyList->pListHead[pDyList->listlength] = elemValue;//往原来数组长度尾上装数据
+	pDyList->listlength++;                               //数组长度加1
 }
 
 
-/*打印输出数组*/
-void printArray(PDynamicArray pDicArr)
+/*打印输出顺序表*/
+void printList(PDynamicList pDyList)
 {
-	if (pDicArr == NULL)
+	if (pDyList == NULL)
 	{
-		printf("传递参数有误!");
+		printf("\n传递参数有误!\n");
 		return;
 	}
 
-	printf("数组容量（size）：%u,数组长度（len）：%u\n", pDicArr->arraysize, pDicArr->arraylength);
+	printf("数组容量（size）：%u,数组长度（len）：%u\n", pDyList->listsize, pDyList->listlength);
 	printf("当前数组元素如下所示:\n");
-	for (unsigned int i = 0; i < pDicArr->arraylength; i++)
+	for (unsigned int i = 0; i < pDyList->listlength; i++)
 	{
-		printf("%d,", pDicArr->pArrayHead[i]);
+		printf("%d,", pDyList->pListHead[i]);
 	}
 }
 
@@ -171,54 +201,125 @@ void printArray(PDynamicArray pDicArr)
 中间插入
 参数3：插入的下标位置
 */
-void MidInsert(PDynamicArray pDicArr, int elemValue, unsigned int position)
+void MidInsert(PDynamicList pDyList, ElemType elemValue, unsigned int position)
 {
-	/*判断数组是否满容,若是则扩容*/
-	ExpandSize(pDicArr);
+	/*判断顺序表是否满容,若是则扩容*/
+	ExpandSize(pDyList);
 
 	/*传递的下标过大*/
-	if (position > pDicArr->arraylength)
+	if (position > pDyList->listlength)
 	{
-		position = pDicArr->arraylength;
+		position = pDyList->listlength;
 	}
 
-	/*数组元素往后移动*/
-	for (unsigned int i = pDicArr->arraylength; i > position; i--)
+	/*表元素往后移动*/
+	for (unsigned int i = pDyList->listlength; i > position; i--)
 	{
-		pDicArr->pArrayHead[i] = pDicArr->pArrayHead[i - 1];
+		pDyList->pListHead[i] = pDyList->pListHead[i - 1];
 	}
 
-	pDicArr->pArrayHead[position] = elemValue;//数据赋值
-	pDicArr->arraylength++;                   //长度加1
+	pDyList->pListHead[position] = elemValue;//数据赋值
+	pDyList->listlength++;                   //长度加1
 }
 
 
-/*数组扩容*/
-void ExpandSize(PDynamicArray pDicArr)
+/*顺序表扩容*/
+void ExpandSize(PDynamicList pDyList)
 {
-	if (pDicArr == NULL)
+	if (pDyList == NULL)
 	{
-		printf("传递参数有误!");
+		printf("\n传递参数有误!\n");
 		return;
 	}
 
 	/*判断数组是否满容*/
-	if (pDicArr->arraylength == pDicArr->arraysize)
+	if (pDyList->listlength == pDyList->listsize)
 	{
-		pDicArr->arraysize += 10;                                   //容量变大
-		int* pTemp = (int*)malloc(sizeof(int) * pDicArr->arraysize);//申请空间
-		memset(pTemp, 0, sizeof(int) * pDicArr->arraysize);
+		pDyList->listsize += 10;                                   //容量变大
+		int* pTemp = (int*)malloc(sizeof(int) * pDyList->listsize);//申请空间
+		memset(pTemp, 0, sizeof(int) * pDyList->listsize);
 
 		/*将原数组复制进新空间*/
-		for (unsigned int i = 0; i < pDicArr->arraylength; i++)
+		for (unsigned int i = 0; i < pDyList->listlength; i++)
 		{
-			pTemp[i] = pDicArr->pArrayHead[i];
+			pTemp[i] = pDyList->pListHead[i];
 		}
 
-		free(pDicArr->pArrayHead);  //释放原空间
-		pDicArr->pArrayHead = pTemp;//将数组头指向新空间
+		free(pDyList->pListHead);  //释放原空间
+		pDyList->pListHead = pTemp;//将数组头指向新空间
 	}
 }
 
 
-/*********************************************动态数组****************************************************/
+/*删除中间*/
+void MidDelete(PDynamicList pDyList, unsigned int position)
+{
+	if (pDyList == NULL || position>pDyList->listlength)
+	{
+		printf("\n传递参数有误!\n");
+		return;
+	}
+
+	/*数据从后往前移动*/
+	for (unsigned i = position-1; i < pDyList->listlength-1; i++)
+	{
+		pDyList->pListHead[i] = pDyList->pListHead[i + 1];
+	}
+
+	pDyList->listlength--;
+}
+
+
+
+/*尾删除*/
+void TailDeleteElem(PDynamicList pDyList)
+{
+	if (pDyList == NULL)
+	{
+		printf("\n传递参数有误!\n");
+		return;
+	}
+
+	pDyList->listlength--;//假删除，只是没遍历到最后一个元素，
+}
+
+
+/*删除全部*/
+void DeleteComplete(PDynamicList pDyList)
+{
+	if (pDyList == NULL)
+	{
+		printf("\n传递参数有误!\n");
+		return;
+	}
+
+	pDyList->listlength=0;	
+	pDyList->listsize = 0;
+
+	free(pDyList->pListHead);
+	pDyList->pListHead = NULL;
+}
+
+
+/*释放动态顺序表*/
+void FreeDynamicList(PDynamicList pDyList)
+{
+	if (pDyList == NULL)
+	{
+		printf("\n传递参数有误!\n");
+		return;
+	}
+
+	pDyList->listlength = 0;
+	pDyList->listsize = 0;
+
+	free(pDyList->pListHead);
+	pDyList->pListHead = NULL;
+}
+
+
+
+
+
+
+/*******************************************动态数组表示顺序表*******************************************/

@@ -24,12 +24,30 @@
     <ClCompile Include="sequence_list.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sequence_stack.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="link_stack.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sequence_queue.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="single_linked_list.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="sequence_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sequence_stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="link_stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sequence_queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

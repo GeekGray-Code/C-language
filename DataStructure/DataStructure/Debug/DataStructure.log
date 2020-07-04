@@ -1,2 +1,11 @@
-﻿  sequence_list.c
+﻿  link_stack.c
+D:\CodeRepo\C\DataStructure\DataStructure\link_stack.c(20,1): warning C4026: 使用形参表声明的函数
+  sequence_list.c
+  main.c
+  sequence_queue.c
+  sequence_stack.c
+  single_linked_list.c
+  正在生成代码...
+D:\CodeRepo\C\DataStructure\DataStructure\single_linked_list.c(898): warning C4715: “selectNode”: 不是所有的控件路径都返回值
+D:\CodeRepo\C\DataStructure\DataStructure\sequence_stack.c(61): warning C4715: “StackEmpty”: 不是所有的控件路径都返回值
   DataStructure.vcxproj -> D:\CodeRepo\C\DataStructure\Debug\DataStructure.exe

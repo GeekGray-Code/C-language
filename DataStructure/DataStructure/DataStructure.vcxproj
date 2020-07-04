@@ -139,12 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="link_stack.c" />
     <ClCompile Include="sequence_list.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="sequence_queue.c" />
+    <ClCompile Include="sequence_stack.c" />
     <ClCompile Include="single_linked_list.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="link_stack.h" />
     <ClInclude Include="sequence_list.h" />
+    <ClInclude Include="sequence_queue.h" />
+    <ClInclude Include="sequence_stack.h" />
     <ClInclude Include="single_linked_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
